@@ -27,7 +27,7 @@ xml="""<?xml version="1.0" encoding="UTF-8"?>
     <property name="window-position">center</property>
     <property name="default-width">1440</property>
     <property name="default-height">810</property>
-    <property name="icon">i.ico</property>
+    
     <property name="urgency-hint">True</property>
     <property name="gravity">center</property>
     <property name="has-resize-grip">True</property>
@@ -729,7 +729,7 @@ datagen= builder.get_object("datagen")
 window = builder.get_object("my_window")
 window.set_title("Vaccination center Simulation")
 window.set_position(Gtk.WindowPosition.CENTER)
-window.set_icon_from_file("depend/i.ico")
+#window.set_icon_from_file("depend/i.ico")
 window.connect("delete-event", Gtk.main_quit)
 window.show_all()
 Gtk.main()
