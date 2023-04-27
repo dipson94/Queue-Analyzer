@@ -611,9 +611,7 @@ Case 4</property>
     </child>
   </object>
 </interface>"""
-folder_name = 'pyfiles'
-if not os.path.exists(folder_name):
-    os.makedirs(folder_name)
+
 def datagenerator(case):
     intg=[]
     intg.append(int(builder.get_object("int").get_property("text")))
@@ -724,6 +722,9 @@ aus 		Exit""")
 
 
 def on_button_clicked(case):
+    folder_name = 'pyfiles'
+    if not os.path.exists(folder_name):
+      os.makedirs(folder_name)
     path=[]
     txt1=builder.get_object("txt1")
     t1=txt1.get_property("text")
