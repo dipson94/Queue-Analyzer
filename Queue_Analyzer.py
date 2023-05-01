@@ -730,6 +730,27 @@ def on_button_clicked(case):
     path.append(builder.get_object("d2").get_filename())
     path.append(builder.get_object("d3").get_filename())
     path.append(builder.get_object("d4").get_filename())
+
+    
+    # Generate the plot
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot([1, 2, 3, 4], [1, 4, 2, 3])
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_title('Title')
+    ax.legend()
+    ax.grid(True)
+
+    # Save the plot as a PNG file
+    file_path = 'pyfiles/plot.png'
+    fig.savefig(file_path)
+
+
+
+
+
+
+
     zcom(t1,t2,path)
 
 builder = Gtk.Builder()
