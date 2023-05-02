@@ -1,6 +1,6 @@
 # Queue Analyzer
 
-This standalone app is the Graphical user interface version of the python program written to generate a distribution for arrival and analyse the results from the Dosimis software. The app is written in python version 3.10 and GUI is enabled with GTK 3.5 with Glide software. Even though app is standalone, the icon files and xml for GUI needed to be stored locally. So, this can be seen in “depend” directory.
+This standalone app is the Graphical user interface version of the python program written to generate a distribution for arrival and analyse the results from the Dosimis software. The app is written in python version 3.10 and GUI is enabled with GTK 3.5 with Glide software.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ https://drive.google.com/file/d/1a4xufbWgqsORqOeehbMgC1g7KJcsVDeC/view?usp=shari
   
 2. Build the .exe file using pyinstaller.  
 run 'pyinstaller -w --onefile Queue Analyzer.py' in terminal.
-find executable in dist folder. copy paste depend folder to that folder.  
+find executable in dist folder. 
   
 3. Run python script file.  
 make sure the following dependencies are met before running Queue Analyzer.py file  
