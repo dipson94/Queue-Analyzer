@@ -1,23 +1,23 @@
-def gen(intg,simu,path,timeslot):
-    tp=[]
+def gen(persons,Simulation,path,time_slot):
+    tp=[] # total people per case
     for i in range(1,5):
-
+        # initialize raw string
         s="""COM	time	Objecttyp	Order Nr(A)"""+"\n"+"""GEN			"""
 
         arr_time=[]    
         x=0
-        val=0
-        while((val)<simu):
-            s=s+"\n"+str(val)+"\t"+str(x+1)+"\t"+str(x+1)+"\t"
-            arr_time.append(val)
+        value=0
+        while((value)<Simulation):
+            s=s+"\n"+str(value)+"\t"+str(x+1)+"\t"+str(x+1)+"\t"
+            arr_time.append(value)
             x=x+1
-            if x%intg[i-1]==0:
-                val=val+timeslot
+            if x%persons[i-1]==0:
+                value=value+time_slot
         tp.append(len(arr_time))
 
-        savloc=str(path)+"/Data"+str(i)+".txt"
+        save_location=str(path)+"/Data"+str(i)+".txt"
         
-        with open(savloc, "w") as f:
+        with open(save_location, "w") as f:
             f.write(s)
         
     return "All data files have been generated !",tp
