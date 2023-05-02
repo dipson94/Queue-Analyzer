@@ -1,4 +1,4 @@
-def gen(persons,Simulation,path,time_slot):
+def gen(persons,Simulation_time,path,time_slot):
     tp=[] # total people per case
     for i in range(1,5):
         # initialize raw string
@@ -7,7 +7,7 @@ def gen(persons,Simulation,path,time_slot):
         arr_time=[]    
         x=0
         value=0
-        while((value)<Simulation):
+        while((value)<Simulation_time):
             s=s+"\n"+str(value)+"\t"+str(x+1)+"\t"+str(x+1)+"\t"
             arr_time.append(value)
             x=x+1

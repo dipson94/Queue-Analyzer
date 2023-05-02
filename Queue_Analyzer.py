@@ -11,15 +11,15 @@ import depend
 
 # Arriaval data generator
 def datagenerator(case):
-    intg=[]
-    intg.append(int(builder.get_object("int").get_property("text")))
-    intg.append(int(builder.get_object("int1").get_property("text")))
-    intg.append(int(builder.get_object("int2").get_property("text")))
-    intg.append(int(builder.get_object("int3").get_property("text")))
-    timeslot=int(builder.get_object("timeslot").get_property("text"))
-    simu=int(builder.get_object("simu").get_property("text"))
+    persons=[]
+    persons.append(int(builder.get_object("int").get_property("text")))
+    persons.append(int(builder.get_object("int1").get_property("text")))
+    persons.append(int(builder.get_object("int2").get_property("text")))
+    persons.append(int(builder.get_object("int3").get_property("text")))
+    time_slot=int(builder.get_object("timeslot").get_property("text"))
+    Simulation_time=int(builder.get_object("simu").get_property("text"))
     path=str(builder.get_object("dirselect").get_filename())
-    status,tp=gen(intg,simu,path,timeslot)
+    status,tp=gen(persons,Simulation_time,path,time_slot)
     datagenresults="""				Case 1		Case 2		Case 3 	Case 4
 
 Total People	   """+str(tp[0])+"""		   """+str(tp[1])+"""		    """+str(tp[2])+"""		   """+str(tp[3])+"""	"""
@@ -78,45 +78,7 @@ def zcom(t1,t2,path):
     pixq = GdkPixbuf.Pixbuf.new_from_file("pyfiles/plotq.png")
     modq.set_from_pixbuf(pixq)
     builder.get_object("qplot").set_property("label","Stack bar graph of waiting time at modules")
-    builder.get_object("qlegend").set_property("label","""ein 		Entrance
-
-An 			Sign Up
-
-L1 			Lane 
-
-Reg 		Registration
-
-L2 			Lane 2
-
-PreV_e 	Pre Vaccination Enter
-
-PreV_1	Pre Vaccination Counter 1
-
-PreV_2	Pre Vaccination Counter 2
-
-PreV_3	Pre Vaccination Counter 3
-
-PreV_4	Pre Vaccination Counter 4
-
-PreV_a	Pre Vaccination Exit
-
-L3			Lane 3
-
-Vacc_e 	Vaccination Entrance
-
-Vacc_1 	Vaccination Counter 1
-
-Vacc_2 	Vaccination Counter 2
-
-Vacc_3 	Vaccination Counter 3
-
-Vacc_4 	Vaccination Counter 4
-
-Vacc_a 	Vaccination Exit
-
-L4 			Lane 4
-
-aus 		Exit""")
+    builder.get_object("qlegend").set_property("label",depend.qlegend)
 
 
 def on_button_clicked(case):
@@ -128,11 +90,11 @@ def on_button_clicked(case):
     t1=txt1.get_property("text")
     txt2=builder.get_object("txt2")
     t2=txt2.get_property("text")
-    path.append(builder.get_object("t1").get_filename()) #tra file
+    path.append(builder.get_object("t1").get_filename())    # .tra files
     path.append(builder.get_object("t2").get_filename())
     path.append(builder.get_object("t3").get_filename())
     path.append(builder.get_object("t4").get_filename())
-    path.append(builder.get_object("d1").get_filename())
+    path.append(builder.get_object("d1").get_filename())    # .txt files
     path.append(builder.get_object("d2").get_filename())
     path.append(builder.get_object("d3").get_filename())
     path.append(builder.get_object("d4").get_filename())

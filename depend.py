@@ -11,6 +11,45 @@ loader = GdkPixbuf.PixbufLoader.new()
 loader.write(decoded_data)
 loader.close()
 pixbuf = loader.get_pixbuf()
+qlegend="""ein 		Entrance
+
+An 			Sign Up
+
+L1 			Lane 
+
+Reg 		Registration
+
+L2 			Lane 2
+
+PreV_e 	Pre Vaccination Enter
+
+PreV_1	Pre Vaccination Counter 1
+
+PreV_2	Pre Vaccination Counter 2
+
+PreV_3	Pre Vaccination Counter 3
+
+PreV_4	Pre Vaccination Counter 4
+
+PreV_a	Pre Vaccination Exit
+
+L3			Lane 3
+
+Vacc_e 	Vaccination Entrance
+
+Vacc_1 	Vaccination Counter 1
+
+Vacc_2 	Vaccination Counter 2
+
+Vacc_3 	Vaccination Counter 3
+
+Vacc_4 	Vaccination Counter 4
+
+Vacc_a 	Vaccination Exit
+
+L4 			Lane 4
+
+aus 		Exit"""
 # GTK GUI in xml stored as Raw string, embedded to avoid external dependency
 xml="""<interface>
 <requires lib="gtk+" version="3.24"/>
