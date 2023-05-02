@@ -1,12 +1,14 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,GdkPixbuf,GLib
-from compare import mainfn
+import os
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, 'pyfiles/')
 from queuemod import qmod
 from datagen import gen
-import os
+from compare import mainfn
 import depend
 
 # Arriaval data generator
@@ -46,9 +48,9 @@ def zcom(t1,t2,path):
     ax.set_ylabel('Time spent in sec')
     ax.legend()
     ax.grid(True)
-    fig.savefig('pyfiles/plot.png', dpi=(1000/fig.get_figwidth()))
+    fig.savefig('data/plot.png', dpi=(1000/fig.get_figwidth()))
     
-    pixbuf = GdkPixbuf.Pixbuf.new_from_file("pyfiles/plot.png")
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file("data/plot.png")
     drw.set_from_pixbuf(pixbuf)
     builder.get_object("plot").set_property("label","Generated from Dwell Time")
     v=qmod()
@@ -73,16 +75,16 @@ def zcom(t1,t2,path):
     ax.set_xlabel('\nModules')
     ax.set_ylabel('Waiting Time/ Case')
     ax.legend()
-    fig.savefig('pyfiles/plotq.png', dpi=(1000/fig.get_figwidth()))
+    fig.savefig('data/plotq.png', dpi=(1000/fig.get_figwidth()))
     modq=builder.get_object("modq")
-    pixq = GdkPixbuf.Pixbuf.new_from_file("pyfiles/plotq.png")
+    pixq = GdkPixbuf.Pixbuf.new_from_file("data/plotq.png")
     modq.set_from_pixbuf(pixq)
     builder.get_object("qplot").set_property("label","Stack bar graph of waiting time at modules")
     builder.get_object("qlegend").set_property("label",depend.qlegend)
 
 
 def on_button_clicked(case):
-    folder_name = 'pyfiles'
+    folder_name = 'data'
     if not os.path.exists(folder_name):
       os.makedirs(folder_name)
     path=[]

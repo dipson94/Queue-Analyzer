@@ -52,7 +52,7 @@ Optimizing the project with size and run speed.
 
 ## License
 
-Gnu Public License  
+GNU General Public License v3.0
 
 ## Author  
 

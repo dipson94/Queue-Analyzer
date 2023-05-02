@@ -16,7 +16,7 @@ def mainfn(mod,mod1,path):
         d_time.append(time)
         thrupt.append(th)
         dg = pd.DataFrame(savecsv)
-        dg.to_csv('pyfiles/result'+str(i+1)+'.csv',header=["Time","object","time in min","Total time spent"],index=False)
+        dg.to_csv('data/result'+str(i+1)+'.csv',header=["Time","object","time in min","Total time spent"],index=False)
     # making a copy of data
     actthrpt=[]
     actthrpt=thrupt.copy()
@@ -57,7 +57,7 @@ def mainfn(mod,mod1,path):
     labels=["case 1","case 2","case 3","case 4"]
     dg = pd.DataFrame(arr)
     # Saving statistical data for exit module
-    dg.to_csv("pyfiles/result.csv",index=False)
+    dg.to_csv("data/result.csv",index=False)
     # color prefernces for ploting
     colors=["red","orange","blue","green"]
     del d_obj
@@ -109,7 +109,7 @@ def mainfn(mod,mod1,path):
     
     dg = pd.DataFrame(arr)
     # Saving statistical data for entry module
-    dg.to_csv("pyfiles/queueresult.csv",index=False)
+    dg.to_csv("data/queueresult.csv",index=False)
     
     
     return result,obj1,time1,colors,thrupt,v1,labels,qresult

@@ -4,7 +4,7 @@ import pandas as pd
 
 def fn(case):
 
-    df =pd.DataFrame(pd.read_csv('pyfiles/input'+str(case)+'.csv',low_memory=False))
+    df =pd.DataFrame(pd.read_csv('data/input'+str(case)+'.csv',low_memory=False))
     b_plus=df[df['BST+']=='B+']
     b_minus=df[df['BST+']=='B-']
     mod=list(set(b_plus['ETT+']))
@@ -35,5 +35,5 @@ def qmod():
         mod=temp[:,0]
     v=np.vstack((mod,a))
     dg = pd.DataFrame(np.transpose(v))
-    dg.to_csv('pyfiles/queue.csv',header=["Module","1","2","3","4"],index=False)
+    dg.to_csv('data/queue.csv',header=["Module","1","2","3","4"],index=False)
     return v

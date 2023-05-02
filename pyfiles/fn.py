@@ -28,11 +28,11 @@ def dataextraction(case,mod,path1,path2):
       title_array.append("0")
       title_array.append("0")
       dg = pd.DataFrame(array)  
-  dg.to_csv('pyfiles/input'+str(case+1)+'.csv',header=title_array,index=False)
+  dg.to_csv('data/input'+str(case+1)+'.csv',header=title_array,index=False)
      
   # Total time, list of module, list of objects, throughtput time and arrival intervel stored to variables
   
-  df =pd.DataFrame(pd.read_csv('pyfiles/input'+str(case+1)+'.csv')) # tra file dataframe
+  df =pd.DataFrame(pd.read_csv('data/input'+str(case+1)+'.csv')) # tra file dataframe
   df=df.fillna(0)
   df=df[df['BST+']=='B-']  # slicing tra file dataframe based on event object module exit
 
