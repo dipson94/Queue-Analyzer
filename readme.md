@@ -17,6 +17,9 @@ The App can be run in three ways.
 1. Download .exe windows executable file.  
 [Download Link](https://drive.google.com/file/d/1a4xufbWgqsORqOeehbMgC1g7KJcsVDeC/view?usp=sharing)  
 https://drive.google.com/file/d/1a4xufbWgqsORqOeehbMgC1g7KJcsVDeC/view?usp=sharing  
+Note: The executable version is older one. so keep all the folders intact when executing the file.
+the reults files coreesponds to exit object.
+
   
 2. Build the .exe file using pyinstaller.  
 run 'pyinstaller -w --onefile Queue Analyzer.py' in terminal.
