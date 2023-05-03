@@ -22,7 +22,9 @@ https://drive.google.com/file/d/112hH66TlmQ7xwqi7EwZhJhfROGHBMQms/view?usp=share
   
 2. Build the .exe file using pyinstaller.  
 run 'pyinstaller -w --onefile Queue Analyzer.py' in terminal.
-find executable in dist folder. 
+find executable in dist folder.
+Or use auto-py-to-exe for GUI experience.
+pip install auto-py-to-exe and then run auto-py-to-exe in terminal.
   
 3. Run python script file.  
 make sure the following dependencies are met before running Queue Analyzer.py file  
