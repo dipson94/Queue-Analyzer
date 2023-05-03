@@ -15,10 +15,9 @@ This standalone app is the Graphical user interface version of the python progra
 The App can be run in three ways.    
   
 1. Download .exe windows executable file.  
-[Download Link](https://drive.google.com/file/d/1a4xufbWgqsORqOeehbMgC1g7KJcsVDeC/view?usp=sharing)  
-https://drive.google.com/file/d/1a4xufbWgqsORqOeehbMgC1g7KJcsVDeC/view?usp=sharing  
-Note: The executable version is older one. so keep all the folders intact when executing the file.
-the reults files coreesponds to exit object.
+[Download Link](https://drive.google.com/file/d/1Fs9tVnP0uDRJT4MGZXNd2kdQSJqKQUe6/view?usp=share_link)  
+https://drive.google.com/file/d/1Fs9tVnP0uDRJT4MGZXNd2kdQSJqKQUe6/view?usp=share_link 
+
 
   
 2. Build the .exe file using pyinstaller.  
