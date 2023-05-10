@@ -22,12 +22,17 @@ The App can be run in three ways.
    pip install auto-py-to-exe and then run auto-py-to-exe in terminal.
 3. Run python script file. make sure the following dependencies are met before running Queue Analyzer.py file.
 
-* Python 3.10 or newer
-* Gtk version 3.0
-* numpy
-* matplotlib
-* pandas
-* datetime
+   - Python 3.10 or newer
+
+   - Gtk version 3.0
+
+   - numpy
+
+   - matplotlib
+
+   - pandas
+
+   - datetime
 
 ## Usage
 
