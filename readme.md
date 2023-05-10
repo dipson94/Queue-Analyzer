@@ -20,14 +20,14 @@ The App can be run in three ways.
    find executable in dist folder.
    Or use auto-py-to-exe for GUI experience.
    pip install auto-py-to-exe and then run auto-py-to-exe in terminal.
-3. Run python script file.
-   make sure the following dependencies are met before running Queue Analyzer.py file
-   • Python 3.10 or newer
-   • Gtk version 3.0
-   • numpy
-   • matplotlib
-   • pandas
-   • datetime
+3. Run python script file. make sure the following dependencies are met before running Queue Analyzer.py file.
+
+* Python 3.10 or newer
+* Gtk version 3.0
+* numpy
+* matplotlib
+* pandas
+* datetime
 
 ## Usage
 
@@ -36,9 +36,9 @@ The top left corner shows the group of widgets to enter details for generating t
 The analyse part uses the rest of the widgets. Use file chooser button to load .tra files and input .txt files (arrival data) for the four cases. These files are in Dosimis model directory. Also note the module number of each module when modelling the model in Dosimis. Enter the module number at which object enter and exits in corresponding text entries. Once the details are loaded click the generate statistics to display the results.
 The results will contain the following items.
 
-    • Statistical data of total time spend and queue length (the time) at entrance for four cases.
-    • Graph plotted between time spend vs number of peoples for four cases.
-    • Second graph plotted between max time spend across each module and corresponding modules for four cases.
+1. Statistical data of total time spend and queue length (the time) at entrance for four cases.
+2. Graph plotted between time spend vs number of peoples for four cases.
+3. Second graph plotted between max time spend across each module and corresponding modules for four cases.
 
 Subsequently a local directory is created and filled with data used for the results including the .png files of graphs.
 
@@ -66,17 +66,15 @@ The below illustraion is the result of the above change.
 
 ![Alt text](image/readme/1683686156741.png)
 
-First column indicates the time starting from the beginning of the simulation.
-
-Third column indicates identifying number of module.
-
-Fourth column indicates the keys to identifiy the current event corresponding to the time.
+* First column indicates the time starting from the beginning of the simulation.
+* Third column indicates identifying number of module.
+* Fourth column indicates the keys to identifiy the current event corresponding to the time.
 
     - B+ indicates the entering time of object into the module.
 
     - B- indicates the exit time of object from module.
 
-Sixth column indicates the object number.
+* Sixth column indicates the object number.
 
 The idendified data is extracted into a dataframe. And that dataframe is used to form the data such as queue tine,dwell tiem etc.
 
