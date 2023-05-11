@@ -5,7 +5,9 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
-sys.path.insert(0, 'pyfiles/')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+pyfiles_path = os.path.join(script_dir, 'pyfiles')
+sys.path.insert(0, pyfiles_path)
 from queuemod import qmod
 from datagen import gen
 from compare import mainfn
