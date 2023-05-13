@@ -64,6 +64,7 @@ The arrival data is generated with regular interval and added to the raw string.
 ![Alt text](image/readme/1683686296907.png)
 
 The above illustration is the data from .tra file when space is used as the delimiter. It is then sliced and saved as .csv format.
+Refer the Dosimis user Manual for more details about .tra file (Dosimis-3 User manual 2017, page number : 414) .
 
 The below illustraion is the result of the above change.
 
