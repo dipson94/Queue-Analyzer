@@ -1,12 +1,14 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,GdkPixbuf,GLib
-import os
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
+from os import path as pathtodir
+from os import makedirs
+from numpy import array,transpose,column_stack,copy,row_stack,ptp,argwhere,linspace,ravel
+from numpy import abs as npabs
+from matplotlib.pyplot import subplots
+from pandas import DataFrame,read_csv
 import datetime
-import base64
+from base64 import b64decode
 def mainfn(mod,mod1,path):
     
     thrupt=[]
@@ -25,24 +27,24 @@ def mainfn(mod,mod1,path):
     # making a copy of data
     actthrpt=[]
     actthrpt=thrupt.copy()
-    obj=np.array(d_obj[0])
+    obj=array(d_obj[0])
     obj1=d_obj.copy()
     time1=d_time.copy()
     # making a statistical data
     
-    d1=np.transpose(np.array([[pd.DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d2=np.transpose(np.array([[pd.DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d3=np.transpose(np.array([[pd.DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d4=np.transpose(np.array([[pd.DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d1=transpose(array([[pd.DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d2=transpose(array([[pd.DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d3=transpose(array([[pd.DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d4=transpose(array([[pd.DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
     
     # combineing statistical data with other identifiers 
     L=["count","mean","std","min","25%","50%","75%","max"]
-    v=np.column_stack((np.array(L),d1,d2,d3,d4))
+    v=column_stack((array(L),d1,d2,d3,d4))
     arr=["","case 1","case 2","case 3","case 4"]
-    v1=np.copy(v)
-    a=np.copy(np.array(v[1:,1:]))
+    v1=copy(v)
+    a=copy(array(v[1:,1:]))
     v[1:,1:]=[[str(datetime.timedelta(seconds=int(x))) for  x  in a[i]] for i in range(7)]
-    arr=np.row_stack((arr,v))
+    arr=row_stack((arr,v))
     
     result = ""
     for row in arr:
@@ -79,22 +81,22 @@ def mainfn(mod,mod1,path):
         d_obj.append(obj)
         d_time.append(time)
         
-    obj=np.array(d_obj[0])
+    obj=array(d_obj[0])
     thrupt=actthrpt
   # making a statistical data for entry module
   
-    d1=np.transpose(np.array([[pd.DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d2=np.transpose(np.array([[pd.DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d3=np.transpose(np.array([[pd.DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d4=np.transpose(np.array([[pd.DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d1=transpose(array([[pd.DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d2=transpose(array([[pd.DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d3=transpose(array([[pd.DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d4=transpose(array([[pd.DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
     
   # combineing statistical data with other identifiers for entry module
     L=["count","mean","std","min","25%","50%","75%","max"]
-    v=np.column_stack((np.array(L),d1,d2,d3,d4))
+    v=column_stack((array(L),d1,d2,d3,d4))
     arr=["","case 1","case 2","case 3","case 4"]
-    a=np.copy(np.array(v[1:,1:]))
+    a=copy(array(v[1:,1:]))
     v[1:,1:]=[[str(datetime.timedelta(seconds=int(x))) for  x  in a[i]] for i in range(7)]
-    arr=np.row_stack((arr,v))
+    arr=row_stack((arr,v))
     qresult = ""
     for row in arr:
       for col in row:
@@ -168,12 +170,12 @@ def dataextraction(case,mod,path1,path2):
   # New data frame formed with time,object corresponding to desired module
   arvl = pd.read_csv(path2, sep='\t') #loading Arrival dataframe
   arvl=arvl.fillna(0)
-  data1=np.array(df[df["ETT+"]==mod]['FLAGS']).astype(int)  # module exit time array
-  data2=np.array(df[df["ETT+"]==mod]['OID-']).astype(int)   # object array 
+  data1=array(df[df["ETT+"]==mod]['FLAGS']).astype(int)  # module exit time array
+  data2=array(df[df["ETT+"]==mod]['OID-']).astype(int)   # object array 
   data3=data1/60
   data3=[int(x) for x in data3] # module exit time array in minutes
-  data4=data1-np.array(arvl[arvl["Objecttyp"].isin(np.array(df[df["ETT+"]==mod]['OID-'].astype(float)))]["COM"]).astype(int)  # total time spent by object in the system
-  result=np.column_stack((data1,data2,data3,data4)) # dataframe to write to csv 
+  data4=data1-array(arvl[arvl["Objecttyp"].isin(array(df[df["ETT+"]==mod]['OID-'].astype(float)))]["COM"]).astype(int)  # total time spent by object in the system
+  result=column_stack((data1,data2,data3,data4)) # dataframe to write to csv 
   return len(data4),data2,data4,result
 
 def fn(case):
@@ -186,15 +188,15 @@ def fn(case):
     dict=['ein','An','L1','Reg','L2','PreV_e','PreV_1','PreV_2','PreV_3','PreV_4','PreV_a','L3','Vacc_e','Vacc_1','Vacc_2','Vacc_3','Vacc_4','Vacc_a','L4','aus']
     values =[[x for x in dict]for _ in range(0,1)]
     values.append([0 for _ in range(0,len(modlis))])
-    values=np.transpose(np.array(values))
+    values=transpose(array(values))
     
     for x in mod:
         nw1=b_minus[b_minus['ETT+']==x]
         nw2=b_plus[b_plus['ETT+']==x] 
 
-        max_diff = np.ptp(np.abs((np.array(nw1[['FLAGS']]).flatten())-np.array(nw2[nw2['OID-'].isin(nw1['OID-'])]['FLAGS'])))
+        max_diff = ptp(npabs((array(nw1[['FLAGS']]).flatten())-array(nw2[nw2['OID-'].isin(nw1['OID-'])]['FLAGS'])))
        
-        t=np.argwhere(np.array(modlis) == x)[0][0]
+        t=argwhere(array(modlis) == x)[0][0]
     
         values[t][1]=int(max_diff/60)
         
@@ -207,8 +209,8 @@ def qmod():
         temp=fn(i+1)
         a.append(temp[:,1])
         mod=temp[:,0]
-    v=np.vstack((mod,a))
-    dg = pd.DataFrame(np.transpose(v))
+    v=vstack((mod,a))
+    dg = pd.DataFrame(transpose(v))
     dg.to_csv('data/queue.csv',header=["Module","1","2","3","4"],index=False)
     return v
 
@@ -216,7 +218,7 @@ def qmod():
 # Icon image data in base64 to avoid external dependency
 image_data = "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"
 # Decode the Base64 string
-decoded_data = base64.b64decode(image_data)
+decoded_data = b64decode(image_data)
 # Using image loader
 loader = GdkPixbuf.PixbufLoader.new()
 loader.write(decoded_data)
@@ -899,7 +901,7 @@ def zcom(t1,t2,path):
     fig, ax = plt.subplots(figsize=(16, 9))
     for i in range(0,4):
         ax.plot(d_obj[i],d_time[i],color=colors[i],label=labels[i])
-        ax.plot(np.linspace(0,thrupt[i], thrupt[i]),[int(v[1][i+1])]*len(np.linspace(0,thrupt[i], thrupt[i])),color=colors[i],linestyle='--')
+        ax.plot(linspace(0,thrupt[i], thrupt[i]),[int(v[1][i+1])]*len(linspace(0,thrupt[i], thrupt[i])),color=colors[i],linestyle='--')
         
     ax.set_xlabel('Number of People')
     ax.set_ylabel('Time spent in sec')
@@ -967,8 +969,8 @@ def on_button_clicked(case):
        else:
           path.append(builder.get_object(t+str(i+1)).get_filename()) # # .txt files
     folder_name = 'data'
-    if not os.path.exists(folder_name):
-      os.makedirs(folder_name)
+    if not pathtodir.exists(folder_name):
+      makedirs(folder_name)
 
     zcom(t1,t2,path)
 
