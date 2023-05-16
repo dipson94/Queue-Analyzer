@@ -30,6 +30,18 @@ The App can be run in three ways.
    - datetime
    - Base64
 
+4. GUI mode with local server (Recommended).
+
+   Runs in local server (most likely localhost:5000). Does not need GTk. Need following libs.
+   - Python 3.10 or newer
+   - Flask
+   - numpy
+   - matplotlib
+   - pandas
+   - datetime
+   - Base64
+   Run app.py (inside the html gui mode directory) and open the local host address showing.
+
 ## Usage
 
 The App has Two functions, one is to generate arrival distribution for the Dosimis model and second is to analyse the results from the simulation of Dosimis model.
