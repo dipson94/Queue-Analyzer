@@ -26,6 +26,24 @@ def index():
     if request.method == 'POST':
 
         if 'analysis' in request.form:
+            def color_alternating_rows(val):
+                temp=""
+                i=0
+                b=True
+                while(i<len(val)):
+                    if val[i:i+3]=="<tr": 
+                        if b==True:
+                            color="#EEEEEE"
+                            b=False 
+                        else:
+                            color="#FFFFFF"
+                            b=True                  
+                        temp=temp+"<tr"+" "+'style="background-color:'+color+'"'
+                        i=i+3             
+                    else:
+                        temp=temp+val[i]
+                        i=i+1
+                return temp
             tra=[]
             txt=[]
             for i in range(0,4):
@@ -41,8 +59,8 @@ def index():
             for i in range(0,4):
                 tra.append(txt[i])
             stat,d_obj,d_time,colors,thrupt,v,labels,qresult=mainfn(exitmod,entrymod,tra)
-            t1 = stat.to_html(index=False)
-            t2 = qresult.to_html(index=False)
+            t1 = color_alternating_rows(stat.to_html(index=False))
+            t2 = color_alternating_rows(qresult.to_html(index=False))
             
             for i in range(0,4):
                 plt.plot(d_obj[i],d_time[i],color=colors[i],label=labels[i])
@@ -55,7 +73,7 @@ def index():
             plt.title("Total Dwell Time")
             plt.savefig('data/plot.png')
             plot_img = BytesIO()
-            plt.savefig(plot_img, format='png')
+            plt.savefig(plot_img, format='png',bbox_inches='tight')
             plot_img.seek(0)
             plot1_url = base64.b64encode(plot_img.getvalue()).decode()
             plt.close() 
@@ -83,13 +101,13 @@ def index():
             ax.legend()
             fig.savefig('data/plotq.png', dpi=(1000/fig.get_figwidth()))
             plot2_img = BytesIO()
-            plt.savefig(plot2_img, format='png')
+            plt.savefig(plot2_img, format='png',bbox_inches='tight',dpi=80)
             plot2_img.seek(0)
             plot2_url = base64.b64encode(plot2_img.getvalue()).decode()
             plt.close() 
-            stbr=""""""
 
-            return render_template('index.html',t1=t1,t2=t2,plot1_url=plot1_url,plot2_url=plot2_url,stbr=stbr)
+            return render_template('index.html',t1=t1,t2=t2,plot1_url=plot1_url,plot2_url=plot2_url)
+
         if 'datagen' in request.form:
             ppl=[]
             for i in range(0,4):
