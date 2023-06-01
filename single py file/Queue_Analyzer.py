@@ -3,7 +3,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,GdkPixbuf,GLib
 from os import path as pathtodir
 from os import makedirs
-from numpy import array,transpose,column_stack,copy,row_stack,ptp,argwhere,linspace,ravel
+from numpy import array,transpose,column_stack,copy,row_stack,ptp,argwhere,linspace,ravel,vstack
 from numpy import abs as npabs
 from matplotlib.pyplot import subplots
 from pandas import DataFrame,read_csv
@@ -22,7 +22,7 @@ def mainfn(mod,mod1,path):
         d_obj.append(obj)
         d_time.append(time)
         thrupt.append(th)
-        dg = pd.DataFrame(savecsv)
+        dg = DataFrame(savecsv)
         dg.to_csv('data/result'+str(i+1)+'.csv',header=["Time","object","time in min","Total time spent"],index=False)
     # making a copy of data
     actthrpt=[]
@@ -32,10 +32,10 @@ def mainfn(mod,mod1,path):
     time1=d_time.copy()
     # making a statistical data
     
-    d1=transpose(array([[pd.DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d2=transpose(array([[pd.DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d3=transpose(array([[pd.DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d4=transpose(array([[pd.DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d1=transpose(array([[DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d2=transpose(array([[DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d3=transpose(array([[DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d4=transpose(array([[DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
     
     # combineing statistical data with other identifiers 
     L=["count","mean","std","min","25%","50%","75%","max"]
@@ -62,7 +62,7 @@ def mainfn(mod,mod1,path):
       result=result+"\n\n"
     
     labels=["case 1","case 2","case 3","case 4"]
-    dg = pd.DataFrame(arr)
+    dg = DataFrame(arr)
     # Saving statistical data for exit module
     dg.to_csv("data/result.csv",index=False)
     # color prefernces for ploting
@@ -85,10 +85,10 @@ def mainfn(mod,mod1,path):
     thrupt=actthrpt
   # making a statistical data for entry module
   
-    d1=transpose(array([[pd.DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d2=transpose(array([[pd.DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d3=transpose(array([[pd.DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
-    d4=transpose(array([[pd.DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d1=transpose(array([[DataFrame(d_time[0][:thrupt[0]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d2=transpose(array([[DataFrame(d_time[1][:thrupt[1]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d3=transpose(array([[DataFrame(d_time[2][:thrupt[2]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
+    d4=transpose(array([[DataFrame(d_time[3][:thrupt[3]]).describe(include="all")] for _ in range(1)])).ravel().astype(int)
     
   # combineing statistical data with other identifiers for entry module
     L=["count","mean","std","min","25%","50%","75%","max"]
@@ -114,7 +114,7 @@ def mainfn(mod,mod1,path):
           
       qresult=qresult+"\n\n"
     
-    dg = pd.DataFrame(arr)
+    dg = DataFrame(arr)
     # Saving statistical data for entry module
     dg.to_csv("data/queueresult.csv",index=False)
     
@@ -146,30 +146,33 @@ def gen(persons,Simulation_time,path,time_slot):
 
 def dataextraction(case,mod,path1,path2):
  # The data from .tra file is extracted with slicing and wrote to input.csv file
-  dg=pd.DataFrame()
+  dg=DataFrame()
   file_path = path1
   with open(file_path, "r") as file:
       contents = file.readlines()
-      array = []      
+      arr = []      
       for line in contents[3:]:
           elements = line.strip().split()
-          array.append([element for element in elements])      
+          arr.append([element for element in elements])      
       title = contents[2].strip().split()      
-      title_array = [element for element in title]      
-      title_array.append("0")
-      title_array.append("0")
-      dg = pd.DataFrame(array)  
-  dg.to_csv('data/input'+str(case+1)+'.csv',header=title_array,index=False)
+      title_arr = [element for element in title]      
+      title_arr.append("0")
+      title_arr.append("0")
+      dg = DataFrame(arr)  
+  dg.to_csv('data/input'+str(case+1)+'.csv',header=title_arr,index=False)
+
+  
      
   # Total time, list of module, list of objects, throughtput time and arrival intervel stored to variables
   
-  df =pd.DataFrame(pd.read_csv('data/input'+str(case+1)+'.csv')) # tra file dataframe
+  df =DataFrame(read_csv('data/input'+str(case+1)+'.csv')) # tra file dataframe
   df=df.fillna(0)
   df=df[df['BST+']=='B-']  # slicing tra file dataframe based on event object module exit
 
   # New data frame formed with time,object corresponding to desired module
-  arvl = pd.read_csv(path2, sep='\t') #loading Arrival dataframe
+  arvl = read_csv(path2, sep='\t') #loading Arrival dataframe
   arvl=arvl.fillna(0)
+
   data1=array(df[df["ETT+"]==mod]['FLAGS']).astype(int)  # module exit time array
   data2=array(df[df["ETT+"]==mod]['OID-']).astype(int)   # object array 
   data3=data1/60
@@ -180,7 +183,7 @@ def dataextraction(case,mod,path1,path2):
 
 def fn(case):
 
-    df =pd.DataFrame(pd.read_csv('data/input'+str(case)+'.csv',low_memory=False))
+    df =DataFrame(read_csv('data/input'+str(case)+'.csv',low_memory=False))
     b_plus=df[df['BST+']=='B+']
     b_minus=df[df['BST+']=='B-']
     mod=list(set(b_plus['ETT+']))
@@ -210,7 +213,7 @@ def qmod():
         a.append(temp[:,1])
         mod=temp[:,0]
     v=vstack((mod,a))
-    dg = pd.DataFrame(transpose(v))
+    dg = DataFrame(transpose(v))
     dg.to_csv('data/queue.csv',header=["Module","1","2","3","4"],index=False)
     return v
 
@@ -898,7 +901,7 @@ def zcom(t1,t2,path):
     label4=builder.get_object("Queue")
     label4.set_property("label", "Queue Time Statistics")
     drw=builder.get_object("drw")
-    fig, ax = plt.subplots(figsize=(16, 9))
+    fig, ax = subplots(figsize=(16, 9))
     for i in range(0,4):
         ax.plot(d_obj[i],d_time[i],color=colors[i],label=labels[i])
         ax.plot(linspace(0,thrupt[i], thrupt[i]),[int(v[1][i+1])]*len(linspace(0,thrupt[i], thrupt[i])),color=colors[i],linestyle='--')
@@ -916,7 +919,7 @@ def zcom(t1,t2,path):
     ls=[[0 for _ in range(20)] for _ in range(4)]
     for x in range(0,4):
         ls[x]=list(int(i) for i in (v[x+1]))
-    fig,ax = plt.subplots(figsize=(16, 9))
+    fig,ax = subplots(figsize=(16, 9))
     ax.bar(v[0], ls[0], color=colors[0],label=labels[0])
     ax.bar(v[0], ls[1],bottom=ls[0], color=colors[1],label=labels[1])
     ax.bar(v[0], ls[2], bottom=[sum(x) for x in zip(ls[0], ls[1])], color=colors[2],label=labels[2])
@@ -955,6 +958,7 @@ def on_button_clicked(case):
 
     t="t"
 
+ 
     for i in range(0,4):
        if builder.get_object(t+str(i+1)).get_filename()==None:
           return 0
@@ -968,9 +972,12 @@ def on_button_clicked(case):
           return 0
        else:
           path.append(builder.get_object(t+str(i+1)).get_filename()) # # .txt files
+    
+   
     folder_name = 'data'
     if not pathtodir.exists(folder_name):
       makedirs(folder_name)
+
 
     zcom(t1,t2,path)
 
