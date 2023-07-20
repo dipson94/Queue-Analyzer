@@ -78,6 +78,11 @@ Enter the following command in Terminal to run program
 ```
 queueanalyzer
 ```
+Run and install preview
+
+https://github.com/dipson94/Queue-Analyzer/assets/123653581/d6a0cac6-0086-4ecc-a708-a4f88f766a8b
+
+
 
 **Standalone running (without install)**
 
